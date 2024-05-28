@@ -1,9 +1,12 @@
 package com.challenge.literAlura.principal;
 
+import com.challenge.literAlura.ConsumeApi;
+
 import java.util.Scanner;
 
 public class Principal {
     private final Scanner scanIn = new Scanner(System.in);
+    private final ConsumeApi api = new ConsumeApi();
 
     public void showMenu () {
         var menu = """
@@ -22,7 +25,7 @@ public class Principal {
             var option = scanIn.nextInt();
             switch (option) {
                 case 1:
-                    //searchBookByTitle();
+                    searchBookByTitle();
                     break;
                 case 2:
                     //listRegisteredBooks();
@@ -41,5 +44,10 @@ public class Principal {
                     System.out.println("No ingreso un valor valido");
             }
         }
+    }
+
+    private void searchBookByTitle() {
+        var data = api.getData("");
+        System.out.println(data);
     }
 }

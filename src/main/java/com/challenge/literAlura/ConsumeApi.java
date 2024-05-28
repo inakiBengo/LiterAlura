@@ -9,9 +9,10 @@ import java.net.http.HttpResponse;
 public class ConsumeApi {
 
     public String getData (String url) {
+        var urlBase = "https://gutendex.com/books/";
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
+                .uri(URI.create(urlBase+url))
                 .build();
         HttpResponse<String> response;
         try {
