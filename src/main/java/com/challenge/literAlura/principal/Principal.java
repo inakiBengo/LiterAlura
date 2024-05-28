@@ -1,6 +1,9 @@
 package com.challenge.literAlura.principal;
 
+import java.util.Scanner;
+
 public class Principal {
+    private final Scanner scanIn = new Scanner(System.in);
 
     public void showMenu () {
         var menu = """
