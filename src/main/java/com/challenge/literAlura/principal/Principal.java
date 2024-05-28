@@ -16,6 +16,30 @@ public class Principal {
                 
                 0- Salir
                 """;
-
+        var isContinue = true;
+        while (isContinue) {
+            System.out.println(menu);
+            var option = scanIn.nextInt();
+            switch (option) {
+                case 1:
+                    //searchBookByTitle();
+                    break;
+                case 2:
+                    //listRegisteredBooks();
+                    break;
+                case 3:
+                    //listRegisteredAuthors
+                    break;
+                case 4:
+                    //listAuthorsAliveInAGivenYear():
+                case 5:
+                    //listBooksByLanguages()
+                    break;
+                case 0:
+                    isContinue = false;
+                default:
+                    System.out.println("No ingreso un valor valido");
+            }
+        }
     }
 }
