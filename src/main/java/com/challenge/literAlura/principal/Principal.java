@@ -1,12 +1,21 @@
 package com.challenge.literAlura.principal;
 
-import com.challenge.literAlura.ConsumeApi;
+import com.challenge.literAlura.models.DataAuthor;
+import com.challenge.literAlura.models.DataBook;
+import com.challenge.literAlura.services.ConsumeApi;
+import com.challenge.literAlura.services.ConvertData;
+import com.challenge.literAlura.models.DataResponse;
 
+import javax.xml.crypto.Data;
+import java.util.Optional;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Principal {
+    private final String URL_BASE = "https://gutendex.com/books/?";
     private final Scanner scanIn = new Scanner(System.in);
     private final ConsumeApi api = new ConsumeApi();
+    private final ConvertData convert = new ConvertData();
 
     public void showMenu () {
         var menu = """
@@ -47,7 +56,31 @@ public class Principal {
     }
 
     private void searchBookByTitle() {
-        var data = api.getData("");
-        System.out.println(data);
+        scanIn.nextLine();
+        System.out.println("Por favor ingrese el titulo del libro");
+        var title = scanIn.nextLine();
+        var json = api.getData(URL_BASE+"search="+title);
+        var data = convert.obtenerDatos(json, DataResponse.class);
+        Optional<DataBook> bookFinder = data.results().stream().findFirst();
+        if (bookFinder.isPresent()) {
+            DataBook book = bookFinder.get();
+            Optional<DataAuthor> author = book.authors().stream().findFirst();
+            String languages = String.join("", book.languages());
+            if (author.isPresent()) {
+                System.out.printf("""
+                        --------Libro Encontrado--------
+                        Titulo: %s
+                        Autor: %s
+                        Copyright: %s
+                        Idiomas: %s
+                        Descargas: %s
+                        %n""",
+                        book.title(), author.get().name(), book.copyright(), languages, book.downloads());
+            } else {
+                System.out.println("No se encontró un autor para el titulo: " + title);
+            }
+        } else {
+            System.out.println("No se encontraron resultados con el titulo: " + title);
+        }
     }
 }
