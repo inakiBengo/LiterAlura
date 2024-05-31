@@ -2,6 +2,7 @@ package com.challenge.literAlura.models;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -10,11 +11,12 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(unique = true)
     String name;
     Integer birth;
     Integer death;
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Book> books;
+    private List<Book> books = new ArrayList<>();
 
     public Author () {}
 
@@ -28,8 +30,9 @@ public class Author {
         return books;
     }
 
-    public void setBooks(List<Book> books) {
-        this.books = books;
+    public void setBooks(Book book) {
+        book.setAuthor(this);
+        this.books.add(book);
     }
 
     public Integer getDeath() {
@@ -54,13 +57,5 @@ public class Author {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 }
