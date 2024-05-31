@@ -11,7 +11,7 @@ Cuenta con una conexión a la api de Gutendex para obtener datos de libros
 y autores, también cuenta con una conexión a una base de datos PostgreSQL
 donde se guardaran los libros y autores buscados en la api.
 
-## Iniciar el proyecto
+## 🚀Iniciar el proyecto
 Para iniciar el proyecto debe configurar la conexión a base de datos, esto 
 lo puede hacer desde el archivo **application.properties**. 
  - Debe inicializar las variables de entorno para DB_HOST y DB_PASSWORD
@@ -29,7 +29,7 @@ spring.application.name=literAlura
 spring.jpa.hibernate.ddl-auto=update
 ````
 
-## Funcionamiento
+## 💡Funcionamiento
 Al iniciar el proyecto desde el archivo **LiterAluraApplication** en consola obtendrá el siguiente resultado:
 
 ![img.png](MarkDownImages/img.png)
@@ -54,7 +54,7 @@ buscará en la base de datos todos los libros que esten en el idioma solicitado.
 
 ![img.png](MarkDownImages/img1.png)![img.png](img.png)
 
-## Conclusion
+## 🤓Conclusion
 En este challenge he aprendido:
 - Obtener datos de una API y serializarlos con la librería **Jackson**.
 - Conectarme a una base de datos a través de variables de entorno para mantener mis datos seguros.
